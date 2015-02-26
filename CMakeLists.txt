@@ -161,3 +161,9 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+include_directories(include ${catkin_INCLUDE_DIRS})
+
+add_executable(battery_watcher src/battery_watcher.cpp)
+target_link_libraries(battery_watcher ${catkin_LIBRARIES})
+add_dependencies(battery_watcher beginner_tutorials_generate_messages_cpp)
