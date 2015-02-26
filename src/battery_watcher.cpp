@@ -1,5 +1,6 @@
 #include "ros/ros.h"
-#include "std_msgs/String.h"
+#include "std_msgs/Int8.h"
+
 
 #include <sstream>
 
@@ -44,7 +45,7 @@ int main(int argc, char **argv)
    * than we can send them, the number here specifies how many messages to
    * buffer up before throwing some away.
    */
-  ros::Publisher chatter_pub = n.advertise<std_msgs::String>("battery_value", 1000);
+  ros::Publisher chatter_pub = n.advertise<std_msgs::Int8>("battery_value", 1000);
 
   ros::Rate loop_rate(10);
 
@@ -58,13 +59,11 @@ int main(int argc, char **argv)
     /**
      * This is a message object. You stuff it with data, and then publish it.
      */
-    std_msgs::String msg;
+    std_msgs::Int8 msg;
 
-    std::stringstream ss;
-    ss << "hello world " << count;
-    msg.data = ss.str();
+    msg.data = count;
 
-    ROS_INFO("%s", msg.data.c_str());
+    ROS_INFO("%i", msg.data);
 
     /**
      * The publish() function is how you send messages. The parameter
